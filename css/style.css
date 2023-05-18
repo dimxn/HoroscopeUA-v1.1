@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: "Ukrainian-Head-Regular", sans-serif;
 }
@@ -24,23 +25,35 @@
 
 body {
   background-color: var(--mainColor);
+  overflow-x: hidden;
+}
+html {
+  overflow-x: hidden;
 }
 
 .card {
   position: absolute;
-
   background-color: var(--white);
   padding: 2rem;
   border-radius: 1.2rem;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  -webkit-box-shadow: 0px 0px 50px #00000050;
   box-shadow: 0px 0px 50px #00000050;
+  -webkit-transition: 0.5s ease;
+  -o-transition: 0.5s ease;
   transition: 0.5s ease;
 }
 
 .card__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -51,7 +64,12 @@ body {
 }
 
 .form {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   font-size: 1.2rem;
   gap: 1.4rem;
@@ -63,7 +81,6 @@ body {
 
 .wave-group .input {
   font-family: "Ukrainian-Head", sans-serif;
-
   font-size: 16px;
   padding: 10px 10px 10px 5px;
   display: block;
@@ -85,19 +102,26 @@ body {
   pointer-events: none;
   left: 5px;
   top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-family: "Ukrainian-Head", sans-serif;
 }
 
 .wave-group .label-char {
   font-family: "Ukrainian-Head", sans-serif;
-
+  -webkit-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
   transition: 0.2s ease all;
+  -webkit-transition-delay: calc(var(--index) * 0.05s);
+  -o-transition-delay: calc(var(--index) * 0.05s);
   transition-delay: calc(var(--index) * 0.05s);
 }
 
 .wave-group .input:focus ~ label .label-char,
 .wave-group .input:valid ~ label .label-char {
+  -webkit-transform: translateY(-20px);
+  -ms-transform: translateY(-20px);
   transform: translateY(-20px);
   font-size: 14px;
   color: var(--blue);
@@ -117,6 +141,7 @@ body {
   bottom: 1px;
   position: absolute;
   background: var(--blue);
+  -o-transition: 0.2s ease all;
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
@@ -142,7 +167,10 @@ body {
   background-color: var(--blue);
   letter-spacing: 1.5px;
   font-size: 20px;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  -webkit-box-shadow: #096ed3 0px 10px 0px 0px;
   box-shadow: #096ed3 0px 10px 0px 0px;
   color: var(--white);
   cursor: pointer;
@@ -150,12 +178,18 @@ body {
 }
 
 .form__btn:hover {
+  -webkit-box-shadow: #096ed3 0px 7px 0px 0px;
   box-shadow: #096ed3 0px 7px 0px 0px;
 }
 
 .form__btn:active {
+  -webkit-box-shadow: #096ed3 0px 0px 0px 0px;
   box-shadow: #096ed3 0px 0px 0px 0px;
+  -webkit-transform: translateY(5px);
+  -ms-transform: translateY(5px);
   transform: translateY(5px);
+  -webkit-transition: 200ms;
+  -o-transition: 200ms;
   transition: 200ms;
 }
 
@@ -174,7 +208,7 @@ body {
 }
 
 .horoscope__img img {
-  width: 50%;
+  width: 30%;
   margin: 20px 0;
 }
 
@@ -191,6 +225,8 @@ body {
   position: relative;
   margin-top: 1.5rem;
   text-align: center;
+  -webkit-transition: 1.4s;
+  -o-transition: 1.4s;
   transition: 1.4s;
   z-index: 2;
   margin-left: 50px;
@@ -203,6 +239,7 @@ body {
   height: 80px;
 }
 .lds-ring div {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   display: block;
   position: absolute;
@@ -211,23 +248,39 @@ body {
   margin: 8px;
   border: 8px solid var(--blue);
   border-radius: 50%;
+  -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: var(--blue) transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
+  -webkit-animation-delay: -0.45s;
   animation-delay: -0.45s;
 }
 .lds-ring div:nth-child(2) {
+  -webkit-animation-delay: -0.3s;
   animation-delay: -0.3s;
 }
 .lds-ring div:nth-child(3) {
+  -webkit-animation-delay: -0.15s;
   animation-delay: -0.15s;
 }
-@keyframes lds-ring {
+@-webkit-keyframes lds-ring {
   0% {
+    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes lds-ring {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -270,6 +323,9 @@ body {
   .card {
   }
   .card__wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     gap: 20px;
   }
@@ -290,6 +346,7 @@ body {
 
 @media screen and (max-width: 450px) {
   .card {
+    margin-top: 20vw;
     width: 90%;
   }
   .wave-group .input {
