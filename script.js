@@ -1,24 +1,23 @@
-import { } from './node_modules/cheerio';
-import { } from './node_modules/axios';
 const form = document.querySelector(".form");
 
+const horoscope = async (number) => {
+    try {
+        const response = await fetch(`https://horoscopeuaapi--dimxn.repl.co/?number=${number}`, {
+            method: "get",
+        });
+        const data = await response.json();
+        return data.horoscopeText;
+    } catch (err) {
+        console.log(err);
+        return null; // Повернути null у разі помилки
+    }
+};
 
-
-horoscope(3);
-
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
     document.querySelector(".horoscope").innerHTML = '<div class="loading"><div class="lds-ring"><div></div><div></div><div></div><div></div></div><p>Шукаю гороскоп</p></div>';
     let load = document.querySelector('.loading');
 
-    const horoscope = (number) => {
-        get(`https://fakty.ua/horoscope/${number}`).then((response) => {
-            const html = response.data;
-            const $ = _load(html);
-            console.log($('column1').text());
-            return $('column1').text();
-        }).catch(err => console.error(err))
-    };
     const img = {
         'Діва': 'https://cdn-icons-png.flaticon.com/512/1994/1994953.png',
         'Козеріг': 'https://cdn-icons-png.flaticon.com/512/3184/3184956.png',
@@ -52,40 +51,40 @@ form.addEventListener('submit', (e) => {
 
     switch (month) {
         case 1:
-            document.querySelector(".horoscope").innerHTML = day <= 19 ? displayHoroscope('Козеріг', horoscope(10), img['Козеріг']) : displayHoroscope('Водолій', horoscope(11), img['Водолій']);
+            document.querySelector(".horoscope").innerHTML = day <= 19 ? displayHoroscope('Козеріг', await horoscope(10), img['Козеріг']) : displayHoroscope('Водолій', await horoscope(11), img['Водолій']);
             break;
         case 2:
-            document.querySelector(".horoscope").innerHTML = day <= 18 ? displayHoroscope('Водолій', horoscope(11), img['Водолій']) : displayHoroscope('Риби', horoscope(12), img['Риби']);
+            document.querySelector(".horoscope").innerHTML = day <= 18 ? displayHoroscope('Водолій', await horoscope(11), img['Водолій']) : displayHoroscope('Риби', await horoscope(12), img['Риби']);
             break;
         case 3:
-            document.querySelector(".horoscope").innerHTML = day <= 20 ? displayHoroscope('Риби', horoscope(12), img['Риби']) : displayHoroscope('Овен', horoscope(1), img['Овен']);
+            document.querySelector(".horoscope").innerHTML = day <= 20 ? displayHoroscope('Риби', await horoscope(12), img['Риби']) : displayHoroscope('Овен', await horoscope(1), img['Овен']);
             break;
         case 4:
-            document.querySelector(".horoscope").innerHTML = day <= 19 ? displayHoroscope('Овен', horoscope(1), img['Овен']) : displayHoroscope('Телець', horoscope(2), img['Телець']);
+            document.querySelector(".horoscope").innerHTML = day <= 19 ? displayHoroscope('Овен', await horoscope(1), img['Овен']) : displayHoroscope('Телець', await horoscope(2), img['Телець']);
             break;
         case 5:
-            document.querySelector(".horoscope").innerHTML = day <= 20 ? displayHoroscope('Телець', horoscope(2), img['Телець']) : displayHoroscope('Близнюки', horoscope(3), img['Близнюки']);
+            document.querySelector(".horoscope").innerHTML = day <= 20 ? displayHoroscope('Телець', await horoscope(2), img['Телець']) : displayHoroscope('Близнюки', await horoscope(3), img['Близнюки']);
             break;
         case 6:
-            document.querySelector(".horoscope").innerHTML = day <= 21 ? displayHoroscope('Близнюки', horoscope(3), img['Близнюки']) : displayHoroscope('Рак', horoscope(4), img['Рак']);
+            document.querySelector(".horoscope").innerHTML = day <= 21 ? displayHoroscope('Близнюки', await horoscope(3), img['Близнюки']) : displayHoroscope('Рак', await horoscope(4), img['Рак']);
             break;
         case 7:
-            document.querySelector(".horoscope").innerHTML = day <= 22 ? displayHoroscope('Рак', horoscope(4), img['Рак']) : displayHoroscope('Лев', horoscope(5), img['Лев']);
+            document.querySelector(".horoscope").innerHTML = day <= 22 ? displayHoroscope('Рак', await horoscope(4), img['Рак']) : displayHoroscope('Лев', await horoscope(5), img['Лев']);
             break;
         case 8:
-            document.querySelector(".horoscope").innerHTML = day <= 22 ? displayHoroscope('Лев', horoscope(5), img['Лев']) : displayHoroscope('Діва', horoscope(6), img['Діва']);
+            document.querySelector(".horoscope").innerHTML = day <= 22 ? displayHoroscope('Лев', await horoscope(5), img['Лев']) : displayHoroscope('Діва', await horoscope(6), img['Діва']);
             break;
         case 9:
-            document.querySelector(".horoscope").innerHTML = day <= 22 ? displayHoroscope('Діва', horoscope(6), img['Діва']) : displayHoroscope('Терези', horoscope(7), img['Терези']);
+            document.querySelector(".horoscope").innerHTML = day <= 22 ? displayHoroscope('Діва', await horoscope(6), img['Діва']) : displayHoroscope('Терези', await horoscope(7), img['Терези']);
             break;
         case 10:
-            document.querySelector(".horoscope").innerHTML = day <= 22 ? displayHoroscope('Терези', horoscope(7), img['Терези']) : displayHoroscope('Скорпіон', horoscope(8), img['Скорпіон']);
+            document.querySelector(".horoscope").innerHTML = day <= 22 ? displayHoroscope('Терези', await horoscope(7), img['Терези']) : displayHoroscope('Скорпіон', await horoscope(8), img['Скорпіон']);
             break;
         case 11:
-            document.querySelector(".horoscope").innerHTML = day <= 21 ? displayHoroscope('Скорпіон', horoscope(8), img['Скорпіон']) : displayHoroscope('Стрілець', horoscope(9), img['Стрілець']);
+            document.querySelector(".horoscope").innerHTML = day <= 21 ? displayHoroscope('Скорпіон', await horoscope(8), img['Скорпіон']) : displayHoroscope('Стрілець', await horoscope(9), img['Стрілець']);
             break;
         case 12:
-            document.querySelector(".horoscope").innerHTML = day <= 21 ? displayHoroscope('Стрілець', horoscope(9), img['Стрілець']) : displayHoroscope('Козеріг', horoscope(10), img['Козеріг']);
+            document.querySelector(".horoscope").innerHTML = day <= 21 ? displayHoroscope('Стрілець', await horoscope(9), img['Стрілець']) : displayHoroscope('Козеріг', await horoscope(10), img['Козеріг']);
             break;
         default:
             document.querySelector(".horoscope").innerHTML = "<h1 style=\"color: red;\">Помилка: Введіть вірні данні</h1>";

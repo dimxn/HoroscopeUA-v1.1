@@ -45,6 +45,8 @@ body {
 .form__input {
   padding: 1rem 0.5rem;
   font-size: 1rem;
+  border: 0;
+  border-bottom: 0.125rem solid var(--blue);
 }
 
 .form__btn {
