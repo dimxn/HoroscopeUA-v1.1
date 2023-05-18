@@ -9,7 +9,7 @@ const horoscope = async (number) => {
         return data.horoscopeText;
     } catch (err) {
         console.log(err);
-        return err;
+        return "Спробуйте, ще раз";
     }
 };
 
