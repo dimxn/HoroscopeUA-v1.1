@@ -9,7 +9,7 @@ const horoscope = async (number) => {
         return data.horoscopeText;
     } catch (err) {
         console.log(err);
-        return err; // Повернути null у разі помилки
+        return err;
     }
 };
 
@@ -87,7 +87,7 @@ form.addEventListener('submit', async (e) => {
             document.querySelector(".horoscope").innerHTML = day <= 21 ? displayHoroscope('Стрілець', await horoscope(9), img['Стрілець']) : displayHoroscope('Козеріг', await horoscope(10), img['Козеріг']);
             break;
         default:
-            document.querySelector(".horoscope").innerHTML = "<h1 style=\"color: red;\">Помилка: Введіть вірні данні</h1>";
+            document.querySelector(".horoscope").innerHTML = '<div class="error"><div class="error__img"><i class="fas fa-ban"></i></div><h1 class="error__title">Помилка: Введіть вірні данні</h1></div>';
     }
 
     load.classList.add('hide')

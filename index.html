@@ -5,31 +5,78 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>HoroscopeUA</title>
   </head>
   <body>
     <main class="card">
-      <h1 class="title">HoroscopeUA</h1>
-      <form class="form">
-        <input
-          id="day"
-          class="form__input"
-          type="number"
-          name="numbers"
-          placeholder="Введіть день"
-        />
-        <input
-          id="month"
-          class="form__input"
-          type="number"
-          name="numbers"
-          placeholder="Введіть місяць"
-        />
-        <button class="form__btn" name="Button" type="submit">
-          Підтвердити
-        </button>
-      </form>
-      <div class="horoscope"></div>
+      <div class="card__wrapper">
+        <div class="card__header">
+          <h1 class="title">HoroscopeUA</h1>
+          <form class="form">
+            <div class="wave-group">
+              <input
+                id="day"
+                required=""
+                type="number"
+                name="numbers"
+                class="input"
+              />
+              <span class="bar"></span>
+              <label class="label">
+                <span class="label-char" style="--index: 0">В</span>
+                <span class="label-char" style="--index: 1">в</span>
+                <span class="label-char" style="--index: 2">е</span>
+                <span class="label-char" style="--index: 3">д</span>
+                <span class="label-char" style="--index: 4">і</span>
+                <span class="label-char" style="--index: 5">т</span>
+                <span class="label-char" style="--index: 6">ь</span>
+                <span class="label-char" style="--index: 7">&nbsp;</span>
+                <span class="label-char" style="--index: 8">д</span>
+                <span class="label-char" style="--index: 9">е</span>
+                <span class="label-char" style="--index: 10">н</span>
+                <span class="label-char" style="--index: 11">ь</span>
+              </label>
+            </div>
+            <div class="wave-group">
+              <input
+                id="month"
+                required=""
+                type="number"
+                name="numbers"
+                class="input"
+              />
+              <span class="bar"></span>
+              <label class="label">
+                <span class="label-char" style="--index: 0">В</span>
+                <span class="label-char" style="--index: 1">в</span>
+                <span class="label-char" style="--index: 2">е</span>
+                <span class="label-char" style="--index: 3">д</span>
+                <span class="label-char" style="--index: 4">і</span>
+                <span class="label-char" style="--index: 5">т</span>
+                <span class="label-char" style="--index: 6">ь</span>
+                <span class="label-char" style="--index: 7">&nbsp;</span>
+                <span class="label-char" style="--index: 8">м</span>
+                <span class="label-char" style="--index: 9">і</span>
+                <span class="label-char" style="--index: 10">с</span>
+                <span class="label-char" style="--index: 11">я</span>
+                <span class="label-char" style="--index: 12">ц</span>
+                <span class="label-char" style="--index: 13">ь</span>
+              </label>
+            </div>
+            <button class="form__btn" name="Button" type="submit">
+              Отримати гороскоп
+            </button>
+          </form>
+        </div>
+        <div class="horoscope"></div>
+      </div>
       <script type="module" src="script.js"></script>
     </main>
   </body>
