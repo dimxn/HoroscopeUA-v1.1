@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector(".form");
+    const dayInput = document.getElementById('day');
+    const monthInput = document.getElementById('month');
 
     const horoscope = async (number) => {
         try {
@@ -14,23 +16,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    const dayInput = document.getElementById('day');
-    const monthInput = document.getElementById('month');
     const validator = (input, maxNumber) => {
         input.addEventListener('input', (e) => {
             const { value } = e.target;
             if (Number(value) > maxNumber) {
                 input.value = maxNumber.toString();
             }
-        })
+        });
     };
+
     validator(dayInput, 31);
     validator(monthInput, 12);
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        document.querySelector(".horoscope").innerHTML = '<div class="loading"><div class="lds-ring"><div></div><div></div><div></div><div></div></div><p>Шукаю гороскоп</p></div>';
-        let load = document.querySelector('.loading');
+        const horoscopeContainer = document.querySelector(".horoscope");
+        const loadingElement = document.createElement('div');
+        loadingElement.classList.add('loading');
+        loadingElement.innerHTML = '<div class="lds-ring"><div></div><div></div><div></div><div></div></div><p>Шукаю гороскоп</p>';
+        horoscopeContainer.innerHTML = '';
+        horoscopeContainer.appendChild(loadingElement);
 
         const img = {
             'Діва': 'https://cdn-icons-png.flaticon.com/512/1994/1994953.png',
@@ -47,66 +52,98 @@ document.addEventListener("DOMContentLoaded", () => {
             'Стрілець': 'https://cdn-icons-png.flaticon.com/512/47/47039.png'
         };
 
-        const displayHoroscope = (zodiac, horoscopeText, img) => {
-            return `<div class=\"result\">
-            <h2 class=\"result__title\">Ваш знак зодіаку:</h2>
-            <div class=\"horoscope__title\">${zodiac}</div>
-            <div class=\"horoscope__img\">
-                <img src=\"${img}\" alt=\"horoscope\">
-            </div>
-            <div class=\"horoscope__text\">
-                <p>${horoscopeText}</p>
-            </div>
-        </div>`;
-        }
+        const displayHoroscope = (zodiac, horoscopeText, imgSrc) => {
+            return `<div class="result">
+                <h2 class="result__title">Ваш знак зодіаку:</h2>
+                <div class="horoscope__title">${zodiac}</div>
+                <div class="horoscope__img">
+                    <img src="${imgSrc}" alt="horoscope">
+                </div>
+                <div class="horoscope__text">
+                    <p>${horoscopeText}</p>
+                </div>
+            </div>`;
+        };
 
-        let day = Number(document.getElementById('day').value),
-            month = Number(document.getElementById('month').value);
+        const day = Number(dayInput.value);
+        const month = Number(monthInput.value);
+
+        let zodiac = '';
+        let horoscopeText = '';
+        let imgSrc = '';
 
         switch (month) {
             case 1:
-                document.querySelector(".horoscope").innerHTML = day <= 19 ? displayHoroscope('Козеріг', await horoscope(10), img['Козеріг']) : displayHoroscope('Водолій', await horoscope(11), img['Водолій']);
+                zodiac = day <= 19 ? 'Козеріг' : 'Водолій';
+                horoscopeText = await horoscope(day <= 19 ? 10 : 11);
+                imgSrc = day <= 19 ? img['Козеріг'] : img['Водолій'];
                 break;
             case 2:
-                document.querySelector(".horoscope").innerHTML = day <= 18 ? displayHoroscope('Водолій', await horoscope(11), img['Водолій']) : displayHoroscope('Риби', await horoscope(12), img['Риби']);
+                zodiac = day <= 18 ? 'Водолій' : 'Риби';
+                horoscopeText = await horoscope(day <= 18 ? 11 : 12);
+                imgSrc = day <= 18 ? img['Водолій'] : img['Риби'];
                 break;
             case 3:
-                document.querySelector(".horoscope").innerHTML = day <= 20 ? displayHoroscope('Риби', await horoscope(12), img['Риби']) : displayHoroscope('Овен', await horoscope(1), img['Овен']);
+                zodiac = day <= 20 ? 'Риби' : 'Овен';
+                horoscopeText = await horoscope(day <= 20 ? 12 : 1);
+                imgSrc = day <= 20 ? img['Риби'] : img['Овен'];
                 break;
             case 4:
-                document.querySelector(".horoscope").innerHTML = day <= 19 ? displayHoroscope('Овен', await horoscope(1), img['Овен']) : displayHoroscope('Телець', await horoscope(2), img['Телець']);
+                zodiac = day <= 19 ? 'Овен' : 'Телець';
+                horoscopeText = await horoscope(day <= 19 ? 1 : 2);
+                imgSrc = day <= 19 ? img['Овен'] : img['Телець'];
                 break;
             case 5:
-                document.querySelector(".horoscope").innerHTML = day <= 20 ? displayHoroscope('Телець', await horoscope(2), img['Телець']) : displayHoroscope('Близнюки', await horoscope(3), img['Близнюки']);
+                zodiac = day <= 20 ? 'Телець' : 'Близнюки';
+                horoscopeText = await horoscope(day <= 20 ? 2 : 3);
+                imgSrc = day <= 20 ? img['Телець'] : img['Близнюки'];
                 break;
             case 6:
-                document.querySelector(".horoscope").innerHTML = day <= 21 ? displayHoroscope('Близнюки', await horoscope(3), img['Близнюки']) : displayHoroscope('Рак', await horoscope(4), img['Рак']);
+                zodiac = day <= 21 ? 'Близнюки' : 'Рак';
+                horoscopeText = await horoscope(day <= 21 ? 3 : 4);
+                imgSrc = day <= 21 ? img['Близнюки'] : img['Рак'];
                 break;
             case 7:
-                document.querySelector(".horoscope").innerHTML = day <= 22 ? displayHoroscope('Рак', await horoscope(4), img['Рак']) : displayHoroscope('Лев', await horoscope(5), img['Лев']);
+                zodiac = day <= 22 ? 'Рак' : 'Лев';
+                horoscopeText = await horoscope(day <= 22 ? 4 : 5);
+                imgSrc = day <= 22 ? img['Рак'] : img['Лев'];
                 break;
             case 8:
-                document.querySelector(".horoscope").innerHTML = day <= 22 ? displayHoroscope('Лев', await horoscope(5), img['Лев']) : displayHoroscope('Діва', await horoscope(6), img['Діва']);
+                zodiac = day <= 22 ? 'Лев' : 'Діва';
+                horoscopeText = await horoscope(day <= 22 ? 5 : 6);
+                imgSrc = day <= 22 ? img['Лев'] : img['Діва'];
                 break;
             case 9:
-                document.querySelector(".horoscope").innerHTML = day <= 22 ? displayHoroscope('Діва', await horoscope(6), img['Діва']) : displayHoroscope('Терези', await horoscope(7), img['Терези']);
+                zodiac = day <= 22 ? 'Діва' : 'Терези';
+                horoscopeText = await horoscope(day <= 22 ? 6 : 7);
+                imgSrc = day <= 22 ? img['Діва'] : img['Терези'];
                 break;
             case 10:
-                document.querySelector(".horoscope").innerHTML = day <= 22 ? displayHoroscope('Терези', await horoscope(7), img['Терези']) : displayHoroscope('Скорпіон', await horoscope(8), img['Скорпіон']);
+                zodiac = day <= 22 ? 'Терези' : 'Скорпіон';
+                horoscopeText = await horoscope(day <= 22 ? 7 : 8);
+                imgSrc = day <= 22 ? img['Терези'] : img['Скорпіон'];
                 break;
             case 11:
-                document.querySelector(".horoscope").innerHTML = day <= 21 ? displayHoroscope('Скорпіон', await horoscope(8), img['Скорпіон']) : displayHoroscope('Стрілець', await horoscope(9), img['Стрілець']);
+                zodiac = day <= 21 ? 'Скорпіон' : 'Стрілець';
+                horoscopeText = await horoscope(day <= 21 ? 8 : 9);
+                imgSrc = day <= 21 ? img['Скорпіон'] : img['Стрілець'];
                 break;
             case 12:
-                document.querySelector(".horoscope").innerHTML = day <= 21 ? displayHoroscope('Стрілець', await horoscope(9), img['Стрілець']) : displayHoroscope('Козеріг', await horoscope(10), img['Козеріг']);
+                zodiac = day <= 21 ? 'Стрілець' : 'Козеріг';
+                horoscopeText = await horoscope(day <= 21 ? 9 : 10);
+                imgSrc = day <= 21 ? img['Стрілець'] : img['Козеріг'];
                 break;
             default:
-                document.querySelector(".horoscope").innerHTML = '<div class="error"><div class="error__img"><i class="fas fa-ban"></i></div><h1 class="error__title">Помилка: Введіть вірні данні</h1></div>';
+                horoscopeContainer.innerHTML = '<div class="error"><div class="error__img"><i class="fas fa-ban"></i></div><h1 class="error__title">Помилка: Введіть вірні дані</h1></div>';
+                return;
         }
 
-        load.classList.add('hide')
+        const horoscopeHtml = displayHoroscope(zodiac, horoscopeText, imgSrc);
+        horoscopeContainer.innerHTML = horoscopeHtml;
+
+        loadingElement.classList.add('hide');
         setTimeout(() => {
-            load.remove()
+            loadingElement.remove();
         }, 1200);
     });
-})
+});
