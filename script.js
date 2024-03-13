@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const horoscope = async (number) => {
         try {
-            const response = await fetch(`https://horoscopeuaapi--dimxn.repl.co/?number=${number}`, {
+            const response = await fetch(`https://dimxn.pp.ua/horoscopeapi/?number=${number}`, {
                 method: "get",
             });
             const data = await response.json();
